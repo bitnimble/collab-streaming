@@ -1,5 +1,13 @@
 # collab-streaming
-Setup instructions for setting up a video stream for collaborative group watching over the internet.
+A small document outlining the setup instructions for setting up a video stream for collaborative group watching over the internet.  
+
+It uses:
+- ffmpeg for the reencoding (currently is just libx264 and aac into a flv container, and is set to bake subs in if the source file is an \*.mkv)
+- nginx for the rtmp server that ffmpeg pipes to
+- HLS for the transport scheme (also served via nginx); as such, it can be played back in-browser with a pure JS implementation player (no Flash here!) and over SSL, on a standard nginx route.
+
+The `hls_fragment` variable is currently set to 1 (second), so that's the maximum out-of-sync you'd get between watchers (unless they pause the video and then resume later, but I'll update the player to be better later so that it just reloads on resume). 
+
 
 # Instructions
 
