@@ -82,9 +82,15 @@ server {
 }
 ```
 
-The port `12345` doesn't matter here obviously, just so long as it matches. It's only there so that we can strip `stream` (or whatever route you chose) from the uri when nginx tries to index into `/hls/`. 
+The port `12345` doesn't matter here obviously, just so long as it matches. We've only got a separate server block on another port so that we can strip `stream` (or whatever route you chose) from the uri when nginx tries to index into `/hls/`, leaving just "index.m3u8" (see watch.html for what I'm talking about). 
 
 Save both files and restart nginx with `sudo service nginx restart`. 
 
 Next, download `watch.html` from this repo and place it at `/var/www/html/collab-streaming/watch.html`. 
 Finally, download and run `broadcast.sh` with `./broadcast.sh [path to video file]` to begin the stream. You can now navigate to `http://localhost/watch` to watch your stream.
+  
+  
+So the overall flow is:  
+```source file -> ffmpeg -> streams to nginx rtmp listener at the /stream/index endpoint -> creates hls files at /hls/index.m3u8 and *.ts```
+and  
+```web browser -> nginx http /stream/index.m3u8 -> proxies to port 12345/index.m3u8 -> accesses /hls/index.m3u8```
