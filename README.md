@@ -84,7 +84,7 @@ server {
 
 The port `12345` doesn't matter here obviously, just so long as it matches. We've only got a separate server block on another port so that we can strip `stream` (or whatever route you chose) from the uri when nginx tries to index into `/hls/`, leaving just "index.m3u8" (see watch.html for what I'm talking about). 
 
-`sudo ln -s /etc/nginx/sites-available/<config-name> /etc/nginx/sites-enabled/`
+Note: if you aren't editing `/etc/nginx/sites-available/default` and are adding a new config instead, you'll have to symlink it accordingly to `sites-enabled` with `sudo ln -s /etc/nginx/sites-available/<config-name> /etc/nginx/sites-enabled/`
 
 Save both files and restart nginx with `sudo service nginx restart`. 
 
