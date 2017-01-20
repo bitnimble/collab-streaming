@@ -87,4 +87,4 @@ The port `12345` doesn't matter here obviously, just so long as it matches. It's
 Save both files and restart nginx with `sudo service nginx restart`. 
 
 Next, download `watch.html` from this repo and place it at `/var/www/html/collab-streaming/watch.html`. 
-Finally, run `broadcast.sh` with `./broadcast.sh [path to video file]` to begin the stream. You can now navigate to `http://localhost/watch` to watch your stream.
+Finally, download and run `broadcast.sh` with `./broadcast.sh [path to video file]` to begin the stream. You can now navigate to `http://localhost/watch` to watch your stream.
