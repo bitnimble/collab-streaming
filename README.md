@@ -18,7 +18,7 @@ First, you'll need to install nginx with the rtmp module. Stop and remove any ex
 Clone [this nginx rtmp module](https://github.com/sergey-dryabzhinsky/nginx-rtmp-module) repo with `git clone https://github.com/sergey-dryabzhinsky/nginx-rtmp-module.git`.  
 
 Then get the latest nginx source with `apt-get source nginx`. `cd` to the directory it created (`nginx-<some version>`).  
-Configure it with `sudo ./configure --with-http_ssl_module --add-module=../nginx-rtmp-module`.  
+Configure it with `sudo ./configure --with-http_ssl_module --add-module=path/to/nginx-rtmp-module`.  
 Now compile it with `make` and then `sudo make install`.  
 
 ### Installing ffmpeg
