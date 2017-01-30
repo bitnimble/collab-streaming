@@ -1,0 +1,119 @@
+body {
+	margin: 0;
+	font-family: "Open Sans";
+	font-size: 12px;
+}
+
+#main-container {
+}
+
+#file-explorer {
+	position: relative;
+	display: block;
+	float: left;
+
+	width: 60%;
+	padding: 20px;
+	border: 1px solid darkgrey;
+
+	height: 100%;
+	box-sizing: border-box;
+}
+
+#queue-list {
+	width: 40%;
+	display: block;
+	float: left;
+}
+
+#path-textbox {
+	font-family: "Open Sans";
+	font-size: 24px;
+	line-height: 40px;
+	box-sizing: border-box;
+	border: 1px solid lightgrey;
+	border-radius: 5px;
+	min-height: 40px;
+	padding: 0px 5px;
+	width: 100%;
+}
+
+#listing-container {
+	position: absolute;
+	overflow-y: scroll;
+	top: 65px;
+	left: 20px;
+	right: 20px;
+	bottom: 10px;
+}
+
+#listing-container ul {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.list-item {
+	display: flex;
+	width: 100%;
+
+	padding: 6px;
+
+	border-bottom: 1px solid lightgrey;
+	border-left: 1px solid lightgrey;
+	border-right: 1px solid lightgrey;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+
+	box-sizing: border-box;
+}
+
+.list-item-index {
+	line-height: 20px;
+	padding: 0 20px 0 5px;
+}
+
+.list-item-icon {
+	width: 16px;
+	height: 16px;
+	border: 1px solid green;
+	margin-right: 10px;
+}
+
+.list-item-text {
+	flex: 1;
+
+	line-height: 20px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.list-item-button {
+	background: white;
+	border: 1px solid black;
+	border-radius: 3px;
+	font-size: 12px;
+	transition: background-color 0.2s;
+	cursor: pointer;
+}
+
+.list-item-button:hover {
+	background-color: #eeeeee;
+}
+
+.folder .list-item-button {
+	display: none;
+}
+
+.file-explorer .list-item-index {
+	display: none;
+}
+
+#queue-list .list-item-icon {
+	display: none;
+}
+
+.list-item.folder {
+	cursor: pointer;
+}
