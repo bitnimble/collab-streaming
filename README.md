@@ -11,15 +11,33 @@ The `hls_fragment` variable is currently set to 1 (second), so that's the maximu
 
 # Instructions
 
-### Compiling nginx with nginx-rtmp-module
-First, you'll need to install nginx with the rtmp module. Stop and remove any existing nginx installations with
-`sudo service nginx stop` and `sudo apt-get remove nginx`. You don't need to (and shouldn't, if you have existing sites) clear out any nginx configuration files, we're only replacing nginx itself.  
+### Compiling nginx with nginx-rtmp-module (Ubuntu/Debian)
 
-Clone [this nginx rtmp module](https://github.com/sergey-dryabzhinsky/nginx-rtmp-module) repo with `git clone https://github.com/sergey-dryabzhinsky/nginx-rtmp-module.git`.  
+Note: if you aren't on Debian, you'll have to find the install instructions yourself -- sorry!  
+
+You'll need to install nginx with the rtmp module. Stop and remove any existing nginx installations with
+`sudo service nginx stop` and `sudo apt-get remove nginx`. You may also have to run `sudo apt-get remove nginx-full` and `sudo apt-get remove nginx-common`. Do all of them just in case.  
+You don't need to (and shouldn't, if you have existing sites!) clear out any nginx configuration files, we're only replacing nginx itself.   
+
+First you'll want to make a new folder where we'll have all our source and compile it, since `dpkg` will create the install packages in the parent directory. Just make a new folder in your home directory called `nginx` or something.  
+Clone [this nginx rtmp module](https://github.com/sergey-dryabzhinsky/nginx-rtmp-module) repo into your new folder with `git clone https://github.com/sergey-dryabzhinsky/nginx-rtmp-module.git`.  
 
 Then get the latest nginx source with `apt-get source nginx`. `cd` to the directory it created (`nginx-<some version>`).  
-Configure it with `sudo ./configure --with-http_ssl_module --add-module=path/to/nginx-rtmp-module`.  
-Now compile it with `make` and then `sudo make install`.  
+Then, open the `debian/rules` file in your favourite editor and scroll down to the `full_configure_flags` section (it may be called `config.status.full` for you depending on what version of nginx is in your package manager) and add the following entry at the bottom, on a new line (after all the other `--add-module` lines):  
+```
+--add-module=/path/to/nginx-rtmp-module
+```
+
+After editing, my configuration looks like the following: ![](https://my.mixtape.moe/fooxlf.png)  
+  
+Save and exit the file. Next, we'll want to install the build dependencies. Run `sudo apt-get build-dep nginx` to do so.  
+Finally, we can compile it; build it with `dpkg-buildpackage -b` in the `nginx-<version>` directory. This will compile and place all the resulting .deb packages in the parent folder. Finally, we can install it; `cd ../` to move to the parent folder first, then install the packages with:
+```
+sudo dpkg --install nginx-common_<version>-<ubuntuversion>_all.deb
+sudo dpkg --install nginx-full_<version>-<ubuntuversion>_amd64.deb
+```
+It's probably fine to just press tab to autocomplete it after typing `nginx-common_` and `nginx-full_`; there should only be one result with those file name prefixes. 
+
 
 ### Installing ffmpeg
 
