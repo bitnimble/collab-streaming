@@ -31,7 +31,7 @@ Then, open the `debian/rules` file in your favourite editor and scroll down to t
 After editing, my configuration looks like the following: ![](https://my.mixtape.moe/fooxlf.png)  
   
 Save and exit the file. Next, we'll want to install the build dependencies. Run `sudo apt-get build-dep nginx` to do so.  
-Finally, we can compile it; build it with `dpkg-buildpackage -b` in the `nginx-<version>` directory. This will compile and place all the resulting .deb packages in the parent folder. Finally, we can install it; `cd ../` to move to the parent folder first, then install the packages with:
+Finally, we can compile it; build it with `sudo dpkg-buildpackage -b` in the `nginx-<version>` directory. This will compile and place all the resulting .deb packages in the parent folder. Finally, we can install it; `cd ../` to move to the parent folder first, then install the packages with:
 ```
 sudo dpkg --install nginx-common_<version>-<ubuntuversion>_all.deb
 sudo dpkg --install nginx-full_<version>-<ubuntuversion>_amd64.deb
